@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en" ng-app="demo" class="no-js">
+<!--<![endif]-->
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Finder Tree</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="demo.css">
+	<link rel="stylesheet" type="text/css" href="dist/finder-tree.css">
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+</head>
+
+<body ng-controller="DemoCtrl as demo">
+
+	<div data-ng-cloak class="content">
+		
+		<h2>Raw Finder-Tree</h2>
+		
+		<p>Selected: {{demo.testSelect.name}}</p>
+		<p>Path: {{demo.testSelect.path}}</p>
+		
+		<finder-tree data="demo.test" ng-model="demo.testSelect" style="height: 200px;"></finder-tree>
+		
+		<h2>Templated Finder-Tree</h2>
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<strong>Folder directory</strong>
+			</div>
+			<div class="panel-body">
+
+				<div class="ft-firstRow">
+					<img src="http://whiteappleer.tw/wp-content/uploads/2011/05/Apple-Mac-OS-X-HardDrive-HDD-icon.png" width="15" height="15" /> Hard Drive
+				</div>
+
+				<finder-tree data="demo.test" ng-model="demo.testSelect" style="height: 300px;"></finder-tree>
+				<div class="ft-footer">
+					<img src="http://whiteappleer.tw/wp-content/uploads/2011/05/Apple-Mac-OS-X-HardDrive-HDD-icon.png" width="15" height="15" /> Hard Drive
+					<i class="mac_caret_right"></i>
+					<span data-ng-repeat="item in demo.testSelect.path track by $index">
+						<i class="ft_folder"></i>{{item}}<i class="mac_caret_right"></i>
+					</span>
+					<span ng-if="demo.testSelect.name">
+						<i class="ft_file"></i>{{demo.testSelect.name}}
+					</span>
+				</div>
+			</div>
+			<div class="panel-footer">
+				{{demo.testSelect.itemNumber}} items
+			</div>
+		</div>
+
+	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+	<script src="demo.js"></script>
+	<script src="dist/finder-tree.js"></script>
+</body>
+
+</html>
