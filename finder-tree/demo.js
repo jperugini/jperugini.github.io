@@ -1,20 +1,26 @@
 (function () {
 
 	angular
-		.module('demo', ['finderTree'])
+		.module('demo', ['finderTree', 'ngDialog'])
 		.controller('DemoCtrl', DemoCtrl);
 
-	function DemoCtrl() {
+	DemoCtrl.$inject = ['ngDialog'];
+
+	function DemoCtrl(ngDialog) {
 
 		/* jshint validthis: true */
 		var vm = this;
 
-		vm.testSelect = {}
+		vm.testSelect = {};
+		vm.tpltestSelect = {};
 		vm.testSelect.itemNumber = 4;
 
 		vm.selectFolder = selectFolder;
 
 		vm.breadcrumbMove = breadcrumbMove;
+
+		vm.newFolder = newFolder;
+		vm.newFile = newFile;
 
 		vm.hardDrive = {
 			'name': 'Hard Drive',
@@ -73,6 +79,8 @@
 				'name': 'Hello/Sub1'
 			}]
 		};
+
+		vm.hd = angular.copy(vm.hardDrive);
 
 		vm.homeFolder = {
 			'name': 'Home',
@@ -157,27 +165,107 @@
 			'structure': vm.homeFolder
 		}];
 
-		vm.listFolder[0].active = true;
-
 		function selectFolder(folder) {
-			angular.forEach(vm.listFolder, function (folder) {
-				folder.active = undefined;
+			angular.forEach(vm.listFolder, function (fol) {
+				fol.active = undefined;
 			});
 			folder.active = true;
-			vm.testSelect = {};
+			vm.tpltestSelect = {};
 			vm.selectedFolder = folder;
-			vm.testSelect.itemNumber = folder.numberItem;
+			vm.tpltestSelect.itemNumber = folder.numberItem;
+			vm.tpltestSelect.path = [];
+			vm.tpltestSelect.path.push(folder.name);
 		};
 
+		selectFolder(vm.listFolder[0]);
+
 		function breadcrumbMove(index) {
-			vm.testSelect.manual = true;
-			if (angular.isDefined(vm.testSelect.path)) {
-				for (var i = vm.testSelect.path.length; i > index; i--) {
-					vm.testSelect.path.splice(i, 1);
+			vm.tpltestSelect.manual = true;
+			if (angular.isDefined(vm.tpltestSelect.path)) {
+				for (var i = vm.tpltestSelect.path.length; i > index; i--) {
+					vm.tpltestSelect.path.splice(i, 1);
 				}
 			}
 		};
-		
+
+		function newFolder() {
+			openModal(0);
+		};
+
+		function newFile() {
+			openModal(1);
+		};
+
+		function openModal(type) {
+			var text;
+			var isFolder;
+			switch (type) {
+			case 0:
+				text = 'New Folder';
+				isFolder = true;
+				break;
+			case 1:
+				text = 'New File';
+				isFolder = false;
+				break;
+			case 2:
+				text = 'Rename';
+				break;
+			case 3:
+				text = 'Delete';
+				break;
+			default:
+				text = 'Error';
+				break;
+			}
+			ngDialog.openConfirm({
+				template: 'modalDialogId',
+				className: 'ngdialog-theme-default',
+				data: {
+					type: text
+				}
+			}).then(function (value) {
+				var path = vm.tpltestSelect.path.slice();
+				path.shift();
+				stepTpPathToCreateItem(vm.selectedFolder.structure, path, value, isFolder, true);
+			}, function (reason) {
+				// console.log('Modal promise rejected. Reason: ', reason);
+			});
+		}
+
+		function stepTpPathToCreateItem(data, path, name, isFolder, createItem) {
+			if (angular.isDefined(path) && path.length > 0) {
+				angular.forEach(data.dirs, function (dir) {
+					if (dir.name === path[0]) {
+						path.shift();
+						if (path.length === 0 && createItem) {
+							addItem(dir, name, isFolder);
+							createItem = false;
+						}
+						stepTpPathToCreateItem(dir, path, name, isFolder, createItem);
+					}
+				});
+			} else {
+				if (createItem) {
+					addItem(data, name, isFolder);
+				}
+			}
+		};
+
+		function addItem(data, name, isFolder) {
+			if (isFolder) {
+				data.dirs.push({
+					name: name,
+					dirs: [],
+					files: []
+				});
+			} else {
+				data.files.push({
+					name: name
+				});
+			}
+		};
+
 	}
 
 })();
