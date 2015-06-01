@@ -26,14 +26,14 @@
 			'name': 'Hard Drive',
 			'dirs': [
 				{
-					'name': 'Hello',
+					'name': 'etc',
 					'dirs': [{
-							'name': 'Hello/sub',
+							'name': 'Long subdirectory',
 							'dirs': [{
-								'name': 'Hello/sub1',
+								'name': 'sub',
 								'dirs': [],
 								'files': [{
-									'name': 'Hello/Sub1'
+									'name': 'long_file_in_sub.txt'
 								}]
 						}],
 							'files': [{
@@ -41,42 +41,42 @@
 							}]
 						},
 						{
-							'name': 'Hello/sub2',
+							'name': 'init.d',
 							'dirs': [],
 							'files': [{
-								'name': 'Very very very long Hello/Sub2'
+								'name': 'service'
 							}]
 						}],
 					'files': [{
-						'name': 'Hello/1'
+						'name': 'file1.txt'
 					}, {
-						'name': 'Hello/2'
+						'name': 'file2.txt'
 					}]
 				}, {
-					'name': 'Test',
+					'name': 'files',
 					'dirs': [],
 					'files': [{
-						'name': 'Test/1'
+						'name': 'config.xml'
 					}, {
-						'name': 'Test/2'
+						'name': 'server.xml'
 					}]
 				},
 				{
-					'name': 'Very very very long Hello',
+					'name': 'var',
 					'dirs': [{
-						'name': 'Hello/sub',
+						'name': 'lib',
 						'dirs': [],
 						'files': [{
-							'name': 'Hello/Sub1'
+							'name': 'lib.jar'
 						}]
 						}],
 					'files': [{
-						'name': 'Hello/1'
+						'name': 'log.xml'
 					}]
 				}
 			],
 			'files': [{
-				'name': 'Hello/Sub1'
+				'name': 'log.txt'
 			}]
 		};
 
@@ -88,12 +88,12 @@
 				{
 					'name': 'Documents',
 					'dirs': [{
-							'name': 'Hello/sub',
+							'name': 'eclipse',
 							'dirs': [{
-								'name': 'Hello/sub',
+								'name': 'plugins',
 								'dirs': [],
 								'files': [{
-									'name': 'Hello/Sub1'
+									'name': 'plugin'
 								}]
 						}],
 							'files': [{
@@ -101,50 +101,50 @@
 							}]
 						},
 						{
-							'name': 'Hello/sub',
+							'name': 'reports',
 							'dirs': [],
 							'files': [{
-								'name': 'Very very very long Hello/Sub2'
+								'name': 'report_finder_tree.pdf'
 							}]
 						}],
 					'files': [{
-						'name': 'Hello/1'
+						'name': 'dis.tar.gz'
 					}, {
-						'name': 'Hello/2'
+						'name': 'test.doc'
 					}]
 				}, {
 					'name': 'Pictures',
 					'dirs': [],
 					'files': [{
-						'name': 'Test/1'
+						'name': 'chat.jpg'
 					}, {
-						'name': 'Test/2'
+						'name': 'test.png'
 					}]
 				},
 				{
 					'name': 'Videos',
 					'dirs': [{
-						'name': 'Hello/sub',
+						'name': 'Movies',
 						'dirs': [],
 						'files': [{
-							'name': 'Hello/Sub1'
+							'name': 'mov.mp4'
 						}]
 						}],
 					'files': [{
-						'name': 'Hello/1'
+						'name': 'tree.mov'
 					}]
 				},
 				{
 					'name': 'finder-tree',
 					'dirs': [{
-						'name': 'Hello/sub',
+						'name': 'demo',
 						'dirs': [],
 						'files': [{
-							'name': 'Hello/Sub1'
+							'name': 'lib.js'
 						}]
 						}],
 					'files': [{
-						'name': 'Hello/1'
+						'name': 'index.html'
 					}]
 				}
 			],
